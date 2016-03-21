@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>功能 &mdash; Test For Doc 0.003 documentation</title>
+    
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.003',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Test For Doc 0.003 documentation" href="index.html" />
+    <link rel="prev" title="This is a Title" href="example.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body role="document">
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="example.html" title="This is a Title"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Test For Doc 0.003 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1><a class="toc-backref" href="#id14">功能</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id14">功能</a><ul>
+<li><a class="reference internal" href="#id2" id="id15">记录</a><ul>
+<li><a class="reference internal" href="#id3" id="id16">记录大小限制</a></li>
+<li><a class="reference internal" href="#id4" id="id17">索引大小限制</a></li>
+<li><a class="reference internal" href="#id5" id="id18">整型显示长度</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6" id="id19">字符集</a><ul>
+<li><a class="reference internal" href="#character-set" id="id20">字符集（Character Set）</a></li>
+<li><a class="reference internal" href="#collation" id="id21">字符序（Collation）</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sql" id="id22">SQL模式</a></li>
+<li><a class="reference internal" href="#id7" id="id23">事务与隔离级别</a><ul>
+<li><a class="reference internal" href="#id8" id="id24">事务及其属性</a></li>
+<li><a class="reference internal" href="#id9" id="id25">并发事务处理带来的问题</a></li>
+<li><a class="reference internal" href="#id10" id="id26">事务隔离级别</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#timestamp" id="id27">TIMESTAMP</a><ul>
+<li><a class="reference internal" href="#id11" id="id28">精度</a></li>
+<li><a class="reference internal" href="#id12" id="id29">初始化</a></li>
+<li><a class="reference internal" href="#explicit-defaults-for-timestamp" id="id30">explicit_defaults_for_timestamp选项</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13" id="id31">总结</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id15">记录</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id16">记录大小限制</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>DB2能够插入的最大记录不能超过pagesize，即最大记录为32K，否则在建表时会报错。MySQL能够插入的最大记录不能超过pagesize的一半，即最大记录为8K。如果MySQL最大记录超过8K，在建表时不会报错，但是插入超过8K的记录时会报错。</p>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id17">索引大小限制</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>在默认16Kpagesize下，单列索引字段大小不能超过767B；组合索引字段总大小不能超过3072B，且每一列大小都不能超过767B，如果表格索引字段大小超过限制会导致建表语句报错。如果在其他pagesize下，索引字段大小限制按比例减小。</p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id18">整型显示长度</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>mysql支持整型数据类型的显示长度扩展选项，例如INT(4)表示该字段为INT型，至少显示4个字符，该选项有如下特点：</p>
+<ol class="arabic simple">
+<li>该选项不影响字段的取值范围，只表示显示的最少位数</li>
+<li>默认情况下，位数不足时使用空格补足位数</li>
+<li>使用SMALLINT(3)
+ZEROFILL这种格式的定义可以用0补位，类似003的显示格式（自动添加UNSIGNED属性）</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id19">字符集</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>MySQL可以为每个数据库字段设置字符集和字符序。如无特殊需求，建议使用utf-8字符集。</p>
+<div class="section" id="character-set">
+<h3><a class="toc-backref" href="#id20">字符集（Character Set）</a><a class="headerlink" href="#character-set" title="Permalink to this headline">¶</a></h3>
+<p>MySQL字符集牵涉较广，最关键的是数据库字段的字符集(集成自表属性)，客户端、数据库连接和应答报文也可以设置字符集(编码)，建议这几处都使用与数据库字符集一致，如果不一致MySQL会根据声明或设置的字符集进行转码。</p>
+<p>MySQL中VARChar/Char类型为字符，DB2中为字节，具体表现在如下几点：</p>
+<ol class="arabic simple">
+<li>VARCHAR(n)和CHAR(n)，其中计数n为字符数量。例如,若字符集gbk，字段设计为char(10),则表示最大存储为10个汉字。</li>
+<li>字符集(编码)校验。如果写入时字符编码非申明编码，则会报错，或内容被截断。</li>
+<li>避免字符集校验。使用binary和varbinary分别代替char和varchar来避免字符集校验。</li>
+</ol>
+</div>
+<div class="section" id="collation">
+<h3><a class="toc-backref" href="#id21">字符序（Collation）</a><a class="headerlink" href="#collation" title="Permalink to this headline">¶</a></h3>
+<p>字符序用于决定比较（排序）规则，一个具体的表现为：</p>
+<ol class="arabic simple">
+<li>一般*_bin的字符序才区分字母大小写。而默认字符序*_ci往往不区分。</li>
+</ol>
+</div>
+</div>
+<div class="section" id="sql">
+<h2><a class="toc-backref" href="#id22">SQL模式</a><a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h2>
+<p>介绍3个建议SQL模式选项：</p>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">PAD_CHAR_TO_FULL_LENGTH</span></code>：对于CHAR类型的字符串，MySQL数据库会自动对存储列的右边进行填充（Right
+Padded）操作，直到字符串达到指定的长度N。而在读取该列时，MySQL数据库会自动将填充的字符删除。有一种情况例外，那就是显式地将<code class="docutils literal"><span class="pre">SQL_MODE</span></code>添加选项<code class="docutils literal"><span class="pre">PAD_CHAR_TO_FULL_LENGTH</span></code>。</li>
+<li><code class="docutils literal"><span class="pre">NO_BACKSLASH_ESCAPES</span></code>：DB2不会自动转义转义字符，以<code class="docutils literal"><span class="pre">\n</span></code>为例，存入字符<code class="docutils literal"><span class="pre">a\nb</span></code>读出仍为<code class="docutils literal"><span class="pre">a\nb</span></code>。MySQL会自动转义转义字符，从DB2向MySQL迁移数据时如果数据中包含转义字符，会导致数据迁移后不可用。如果要求MySQL与DB2一致，不要自动转义转义字符，需要在<code class="docutils literal"><span class="pre">SQL_MODE</span></code>中添加<code class="docutils literal"><span class="pre">NO_BACKSLASH_ESCAPES</span></code>选项。</li>
+<li><code class="docutils literal"><span class="pre">STRICT_TRANS_TABLES</span></code>：主要有如下影响：<ul>
+<li>语句中对于非空字段需要赋值或者设置默认值，否则会报错;</li>
+<li>语句错误（值非法或丢失），如本条语句为事务内第一条语句，则回滚本条语句;</li>
+<li>语句错误（值非法或丢失），如本条语句非本事务内第一条语句。mysql会将非法值转为最相近的合法值(丢失使用默认值)。mysql给出一条警告后，继续执行语句。</li>
+</ul>
+</li>
+</ol>
+<p>如需兼容DB2的特性，建议设置参数sql_mode为：</p>
+<div class="code sql highlight-python"><div class="highlight"><pre><span></span>sql_mode=&quot;STRICT_TRANS_TABLES,PAD_CHAR_TO_FULL_LENGTH,
+NO_BACKSLASH_ESCAPES&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id23">事务与隔离级别</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id24">事务及其属性</a><a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>事务是由一组SQL语句组成的逻辑处理单元，事务具有以下4个属性，通常简称为事务的ACID属性。</p>
+<ul class="simple">
+<li>原子性（Atomicity）</li>
+</ul>
+<p>事务是一个原子操作单元，其对数据的修改，要么全都执行，要么全都不执行。</p>
+<ul class="simple">
+<li>一致性（Consistent）</li>
+</ul>
+<p>在事务开始和完成时，数据都必须保持一致状态。这意味着所有相关的数据规则都必须应用于事务的修改，以保持数据的完整性；事务结束时，所有的内部数据结构（如B树索引或双向链表）也都必须是正确的。</p>
+<ul class="simple">
+<li>隔离性（Isolation）</li>
+</ul>
+<p>数据库系统提供一定的隔离机制，保证事务在不受外部并发操作影响的“独立”环境执行。这意味着事务处理过程中的中间状态对外部是不可见的，反之亦然。</p>
+<ul class="simple">
+<li>持久性（Durable）</li>
+</ul>
+<p>事务完成之后，它对于数据的修改是永久性的，即使出现系统故障也能够保持。</p>
+</div>
+<div class="section" id="id9">
+<h3><a class="toc-backref" href="#id25">并发事务处理带来的问题</a><a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>相对于串行处理来说，并发事务处理能大大增加数据库资源的利用率，提高数据库系统的事务吞吐量，从而可以支持更多的用户。但并发事务处理也会带来一些问题，主要包括以下几种情况：</p>
+<ul class="simple">
+<li>更新丢失（Lost Update）</li>
+</ul>
+<p>当两个或多个事务选择同一行，然后基于最初选定的值更新该行时，由于每个事务都不知道其他事务的存在，就会发生丢失更新问题－－最后的更新覆盖了由其他事务所做的更新。</p>
+<ul class="simple">
+<li>脏读（Dirty Reads）</li>
+</ul>
+<p>一个事务正在对一条记录做修改，在这个事务完成并提交前，这条记录的数据就处于不一致状态；这时，另一个事务也来读取同一条记录，如果不加控制，第二个事务读取了这些“脏”数据，并据此做进一步的处理，就会产生未提交的数据依赖关系。这种现象被形象地叫做&#8221;脏读&#8221;。</p>
+<ul class="simple">
+<li>不可重复读（Non-Repeatable Reads）</li>
+</ul>
+<p>一个事务在读取某些数据后的某个时间，再次读取以前读过的数据，却发现其读出的数据已经发生了改变、或某些记录已经被删除了！这种现象就叫做“不可重复读”。</p>
+<ul class="simple">
+<li>幻读（Phantom Reads）</li>
+</ul>
+<p>一个事务按相同的查询条件重新读取以前检索过的数据，却发现其他事务插入了满足其查询条件的新数据，这种现象就称为“幻读”。</p>
+</div>
+<div class="section" id="id10">
+<h3><a class="toc-backref" href="#id26">事务隔离级别</a><a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>并发事务处理带来的问题中，“更新丢失”通常是应该完全避免的。但防止更新丢失，并不能单靠数据库事务控制器来解决，需要应用程序对要更新的数据加必要的锁来解决，因此，防止更新丢失应该是应用的责任。</p>
+<p>“脏读”、“不可重复读”和“幻读”，其实都是数据库读一致性问题，必须由数据库提供一定的事务隔离机制来解决。数据库实现事务隔离的方式，基本上可分为以下两种。</p>
+<ul class="simple">
+<li>一种是在读取数据前，对其加锁，阻止其他事务对数据进行修改。</li>
+<li>另一种是不用加任何锁，通过一定机制生成一个数据请求时间点的一致性数据快照（Snapshot)，并用这个快照来提供一定级别（语句级或事务级）的一致性读取。从用户的角度来看，好象是数据库可以提供同一数据的多个版本，因此，这种技术叫做数据多版本并发控制（MultiVersion
+Concurrency Control，简称MVCC或MCC），也经常称为多版本数据库。</li>
+</ul>
+<p>数据库的事务隔离越严格，并发副作用越小，但付出的代价也就越大，因为事务隔离实质上就是使事务在一定程度上“串行化”进行，这显然与“并发”是矛盾的。同时，不同的应用对读一致性和事务隔离程度的要求也是不同的，比如许多应用对“不可重复读”和“幻读”并不敏感，可能更关心数据并发访问的能力。</p>
+<p>为了解决“隔离”与“并发”的矛盾，ISO/ANSI
+SQL92定义了4个事务隔离级别，每个级别的隔离程度不同，允许出现的副作用也不同，应用可以根据自己的业务逻辑要求，通过选择不同的隔离级别来平衡“隔离”与“并发”的矛盾。</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>+------------------------------------------------------------------+
+| 隔离级别                   | 读数据一致性    | 脏读 | 不可重复读 | 幻读  |
++------------------------------------------------------------------+
+| 未提交读(Read uncommitted) | 最低级别       | 是   | 是       | 是    |
++------------------------------------------------------------------+
+| 已提交度(Read committed)   | 语句级         | 否   | 是       | 是   |
++------------------------------------------------------------------+
+| 可重复读(Repeatable read)  | 事务级         | 否   | 否       | 是   |
++------------------------------------------------------------------+
+| 可序列化(Serializable)     | 最高级别，事务级 | 否   | 否       | 否   |
++------------------------------------------------------------------+
+</pre></div>
+</div>
+<p>较低的隔离级别 = 较好的性能</p>
+<p>MySQL默认的隔离级别是 Repeatable read</p>
+<p>推荐使用Read
+committed，binlog格式使用mixed或是Row，因为基于语句复制不支持Read
+committed隔离级别。</p>
+</div>
+</div>
+<div class="section" id="timestamp">
+<h2><a class="toc-backref" href="#id27">TIMESTAMP</a><a class="headerlink" href="#timestamp" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h3><a class="toc-backref" href="#id28">精度</a><a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>在临时值、临时函数的参数或返回值中可以使用小数秒，最大精度为6位小数，即微秒。超过6位小数，超过部分将会被四舍五入至微秒。</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>mysql&gt; SELECT MICROSECOND(&#39;2010-12-10 14:12:09.019473&#39;);
++-------------------------------------------+
+| MICROSECOND(&#39;2010-12-10 14:12:09.019473&#39;) |
++-------------------------------------------+
+|                                     19473 |
++-------------------------------------------+
+
+mysql&gt; SELECT MICROSECOND(&#39;2010-12-10 14:12:09.0194735&#39;);
++--------------------------------------------+
+| MICROSECOND(&#39;2010-12-10 14:12:09.0194735&#39;) |
++--------------------------------------------+
+|                                      19474 |
++--------------------------------------------+
+</pre></div>
+</div>
+<p>在存储时，如果建表语句中未指定TIMESTAMP字段的精度，整个小数部分会被四舍五入至秒。</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>mysql&gt; CREATE TABLE fractest1
+( c1 TIME, c2 DATETIME, c3 TIMESTAMP );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql&gt; INSERT INTO fractest1 VALUES
+(&#39;17:51:04.123456&#39;, &#39;2014-09-08 17:51:04.654321&#39;,
+&#39;2014-09-08 17:51:04.567890&#39;);
+Query OK, 1 row affected (0.00 sec)
+
+mysql&gt; SELECT * FROM fractest1;
++----------+---------------------+---------------------+
+| c1        | c2                      | c3             |
++----------+---------------------+---------------------+
+| 17:51:04 | 2014-09-08 17:51:05 | 2014-09-08 17:51:05 |
++----------+---------------------+---------------------+
+</pre></div>
+</div>
+<p>如果建表语句中指定TIMESTAMP字段的精度，则超过精度部分会被四舍五入。</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>mysql&gt; CREATE TABLE fractest2
+( c1 TIME(2), c2 DATETIME(3), c3 TIMESTAMP(6) );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql&gt; INSERT INTO fractest2 VALUES
+(&#39;17:51:04.123456&#39;, &#39;2014-09-08 17:51:04.654321&#39;,
+&#39;2014-09-08 17:51:04.5678905&#39;);
+Query OK, 1 row affected (0.01 sec)
+
+mysql&gt; SELECT * FROM fractest2;
++-------------+-------------------------+----------------------------
+| c1            | c2                          | c3                             |
++-------------+-------------------------+----------------------------
+| 17:51:04.12 | 2014-09-08 17:51:04.654 | 2014-09-08 17:51:04.567891 |
++-------------+-------------------------+----------------------------
+</pre></div>
+</div>
+</div>
+<div class="section" id="id12">
+<h3><a class="toc-backref" href="#id29">初始化</a><a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>一张表中可以有任意多个TIMESTAMP字段可以被自动初始化或更新成当前时间戳current
+timestamp。</p>
+</div>
+<div class="section" id="explicit-defaults-for-timestamp">
+<h3><a class="toc-backref" href="#id30">explicit_defaults_for_timestamp选项</a><a class="headerlink" href="#explicit-defaults-for-timestamp" title="Permalink to this headline">¶</a></h3>
+<p>启动服务时，如果未打开explicit_defaults_for_timestamp选项，则会报警：</p>
+<div class="code sql highlight-python"><div class="highlight"><pre><span></span>[Warning] TIMESTAMP with implicit DEFAULT value is deprecated.
+Please use --explicit_defaults_for_timestamp server option
+(see documentation for more details).
+</pre></div>
+</div>
+<p>explicit_defaults_for_timestamp选项，行为如下：</p>
+<ol class="arabic simple">
+<li>TIMESTAMP字段如果没有显示地声明为NOT NULL，则默认为NULL。</li>
+<li>任何一个TIMESTAMP字段都不会被自动设置为DEFAULT CURRENT_TIMESTAMP 或
+ON UPDATE CURRENT_TIMESTAMP，如果需要这些属性都需显示地指定。</li>
+<li>TIMESTAMP字段被声明为NOT NULL且无默认值，建表语句不会自动设默认值。</li>
+<li>不指定TIMESTAMP字段值插入时，结果取决于SQL Mode：如果Strict SQL
+Mode打开，插入会报错。如果Strict SQL
+Mode未打开，这个字段会被赋值为&#8216;0000-00-00 00:00:00&#8217;，且会报警。</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id13">
+<h2><a class="toc-backref" href="#id31">总结</a><a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<p>综上所述，建议使用如下配置使用数据库：</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">.../</span><span class="n">my</span><span class="o">.</span><span class="n">cnf</span>
+
+<span class="p">[</span><span class="n">mysqld</span><span class="p">]</span>
+<span class="c1">#默认服务器端字符集</span>
+<span class="n">character_set_server</span><span class="o">=</span><span class="n">utf8</span>
+<span class="c1">#填充、转义类db2特性</span>
+<span class="n">sql_mode</span><span class="o">=</span><span class="s2">&quot;STRICT_TRANS_TABLES,PAD_CHAR_TO_FULL_LENGTH,NO_BACKSLASH_ESCAPES&quot;</span>
+
+<span class="c1">## timestamp</span>
+<span class="n">explicit_defaults_for_timestamp</span>
+
+<span class="p">[</span><span class="n">client</span><span class="p">]</span>
+<span class="c1">#客户端使用字符集</span>
+<span class="n">default</span><span class="o">-</span><span class="n">character</span><span class="o">-</span><span class="nb">set</span><span class="o">=</span><span class="n">utf8</span>
+</pre></div>
+</div>
+<p>对于pagesize为16K的linux系统，数据库设计时，单条记录大小不能超过8K，单列索引字段大小不能超过767B，组合索引字段总大小不能超过3072B。</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">功能</a><ul>
+<li><a class="reference internal" href="#id2">记录</a><ul>
+<li><a class="reference internal" href="#id3">记录大小限制</a></li>
+<li><a class="reference internal" href="#id4">索引大小限制</a></li>
+<li><a class="reference internal" href="#id5">整型显示长度</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">字符集</a><ul>
+<li><a class="reference internal" href="#character-set">字符集（Character Set）</a></li>
+<li><a class="reference internal" href="#collation">字符序（Collation）</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sql">SQL模式</a></li>
+<li><a class="reference internal" href="#id7">事务与隔离级别</a><ul>
+<li><a class="reference internal" href="#id8">事务及其属性</a></li>
+<li><a class="reference internal" href="#id9">并发事务处理带来的问题</a></li>
+<li><a class="reference internal" href="#id10">事务隔离级别</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#timestamp">TIMESTAMP</a><ul>
+<li><a class="reference internal" href="#id11">精度</a></li>
+<li><a class="reference internal" href="#id12">初始化</a></li>
+<li><a class="reference internal" href="#explicit-defaults-for-timestamp">explicit_defaults_for_timestamp选项</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13">总结</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="example.html"
+                        title="previous chapter">This is a Title</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="example.html" title="This is a Title"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Test For Doc 0.003 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, zhenma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>
